@@ -1,12 +1,11 @@
 'use strict';
 
-const Benchmark = require('benchmark');
-const mime = require('..');
-const mimeLite = require('../lite');
+import Benchmark from 'benchmark';
+import { mime, mimeLite } from '.';
 
 const suite = new Benchmark.Suite();
 
-const extensions = Object.keys(mime._types);
+const extensions = mime.getExtensions();
 let idx = 0;
 
 suite

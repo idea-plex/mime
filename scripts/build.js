@@ -49,7 +49,7 @@ for (let type in db) {
 }
 
 function writeTypesFile(types, path) {
-  fs.writeFileSync(path, 'module.exports = ' + JSON.stringify(types) + ';');
+  fs.writeFileSync(path, `import { MimeMap } from '../src/interfaces';\n\nconst types: MimeMap = ${JSON.stringify(types)};\n\n export default types;`);
 }
 
 // Segregate into standard and non-standard types based on facet per
@@ -69,5 +69,5 @@ Object.keys(db).sort().forEach(function(k) {
   }
 });
 
-writeTypesFile(standard, path.join(__dirname, '../types', 'standard.js'));
-writeTypesFile(other, path.join(__dirname, '../types', 'other.js'));
+writeTypesFile(standard, path.join(__dirname, '../types', 'standard.ts'));
+writeTypesFile(other, path.join(__dirname, '../types', 'other.ts'));

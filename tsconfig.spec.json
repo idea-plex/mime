@@ -1,0 +1,9 @@
+{
+    "extends": "./tsconfig.json",  
+    "compilerOptions": {
+      "types": ["jest"],                                 /* Type declaration files to be included in compilation. */
+    },
+    "exclude": ["node_modules", "src/*.ts" ],
+    "include": [ "src/*.spec.ts"]
+  }
+  
