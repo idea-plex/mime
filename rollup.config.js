@@ -1,7 +1,9 @@
 import dts from 'rollup-plugin-dts';
+import pluginNodeResolve from "@rollup/plugin-node-resolve";
+
 // import esbuild from 'rollup-plugin-esbuild';
 
-const name = require('./package.json').main.replace(/\.js$/, '');
+const name = 'mime';
 
 // const bundle = config => ({
 //   ...config,
@@ -39,31 +41,31 @@ import typescript from '@rollup/plugin-typescript';
 export default [{
     input: 'src/index.ts',
     output: {        
-        file: `dist/${name}.js`,
+        file: `lib/${name}.js`,
         name,
         format: 'cjs'
     },
     plugins: [typescript({       
-        tsconfig: './tsconfig.lib.json',
+        tsconfig: './src/tsconfig.json',
         declaration: false
     })]
 },{
     input: 'src/index.ts',
     output: {        
-        file: `dist/${name}.mjs`,
+        file: `lib/${name}.mjs`,
         format: 'es'
     },
     plugins: [typescript({        
-        tsconfig: './tsconfig.lib.json',
+        tsconfig: './src/tsconfig.json',
         declaration: false
     })]
 },{
     input: 'src/index.ts',    
     output: {                
-        file: 'dist/index.d.ts',
+        file: 'lib/index.d.ts',
     },
     plugins: [typescript({
-        declarationDir: 'dist',
-        tsconfig: './tsconfig.lib.json',        
+        declarationDir: 'lib',
+        tsconfig: './src/tsconfig.json',        
     }), dts()]
 }]

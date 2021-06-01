@@ -1,0 +1,8 @@
+{
+    "extends": "../tsconfig.json",  
+    "compilerOptions": {
+      "types": ["jest", "node"],                                 /* Type declaration files to be included in compilation. */
+    },    
+    "include": [ "mime.spec.ts"]
+}
+  

@@ -5,7 +5,9 @@ runmd.onRequire = path => path.replace(/^mime/, '..');
 
 A comprehensive, compact MIME type module.
 
-[![Build Status](https://travis-ci.org/broofa/mime.svg?branch=master)](https://travis-ci.org/broofa/mime)
+## Typescript Version
+
+This version has modifications and is rewritten in typescript. Documentation isn't updated yet.
 
 ## Version 2 Notes
 
@@ -48,7 +50,7 @@ Or, for the `mime/lite` version:
 For the full version (800+ MIME types, 1,000+ extensions):
 
 ```javascript --run default
-const mime = require('mime');
+const mime = require('mime').mime;
 
 mime.getType('txt');                    // RESULT
 mime.getExtension('text/plain');        // RESULT
@@ -109,7 +111,7 @@ However if you would like to create custom mappings, you may do so as follows
 
 ```javascript --run default
 // Require Mime class
-const Mime = require('mime/Mime');
+const Mime = require('mime').Mime;
 
 // Define mime type -> extensions map
 const typeMap = {

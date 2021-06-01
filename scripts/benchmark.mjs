@@ -1,7 +1,7 @@
 'use strict';
 
 import Benchmark from 'benchmark';
-import { mime, mimeLite } from '.';
+import { mime, mimeLite } from '../lib/mime';
 
 const suite = new Benchmark.Suite();
 

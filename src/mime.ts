@@ -1,14 +1,16 @@
 import { MimeMap } from "./interfaces";
 
 export class Mime {
-    private types = new Map<string, string>();
-    private extensions = new Map<string, string>();
+  // maps extension to mime type
+  private types = new Map<string, string>();
+  // maps mime type to extension
+  private extensions = new Map<string, string>();
 
   /**
  * @param typeMap [Object] Map of MIME type -> Array[extensions]
  * @param ...
  */
-  constructor(...typeMaps: MimeMap[]) {    
+  constructor(...typeMaps: MimeMap[]) {
     for (const arg of typeMaps) {
       this.define(arg);
     }
@@ -34,28 +36,28 @@ export class Mime {
  * @param force (Boolean) if true, force overriding of existing definitions
  */
   define(typeMap: MimeMap, force?: boolean) {
-      for (let [type, extensions] of Object.entries(typeMap)) {
-        extensions = extensions.map(t => t.toLowerCase());
-        type = type.toLowerCase();
+    for (const [typ, exts] of Object.entries(typeMap)) {
+      const extensions = exts.map(t => t.toLowerCase());
+      const type = typ.toLowerCase();
 
-        for (const ext of extensions) {
-            // '*' prefix = not the preferred type for this extension.  So fixup the
-            // extension, and skip it.
-            if (ext.startsWith('*')) {
-                continue;
-            }
-
-            if (!force && (this.types.has(ext))) {
-                throw new Error(
-                  'Attempt to change mapping for "' + ext +
-                  '" extension from "' + this.types.get(ext) + '" to "' + type +
-                  '". Pass `force=true` to allow this, otherwise remove "' + ext +
-                  '" from the list of extensions for "' + type + '".'
-                );
-            }
-
-            this.types.set(ext, type);
+      for (const ext of extensions) {
+        // If extension is prefixed with '*', it is used elsewhere and is not preferred for this type
+        // So we skip it
+        if (ext.startsWith('*')) {
+          continue;
         }
+
+        if (!force && (this.types.has(ext))) {
+          throw new Error(
+            'Attempt to change mapping for "' + ext +
+            '" extension from "' + this.types.get(ext) + '" to "' + type +
+            '". Pass `force=true` to allow this, otherwise remove "' + ext +
+            '" from the list of extensions for "' + type + '".'
+          );
+        }
+
+        this.types.set(ext, type);
+      }
 
 
       // Use first extension as default
@@ -71,11 +73,11 @@ export class Mime {
    */
   getType(path: unknown): string | null {
     const strPath = String(path);
-    let last = strPath.replace(/^.*[/\\]/, '').toLowerCase();
-    let ext = last.replace(/^.*\./, '').toLowerCase();
+    const last = strPath.replace(/^.*[/\\]/, '').toLowerCase();
+    const ext = last.replace(/^.*\./, '').toLowerCase();
 
-    let hasPath = last.length < strPath.length;
-    let hasDot = ext.length < last.length - 1;
+    const hasPath = last.length < strPath.length;
+    const hasDot = ext.length < last.length - 1;
 
     return (hasDot || !hasPath) && this.types.get(ext) || null;
   }
@@ -84,11 +86,16 @@ export class Mime {
    * Return file extension associated with a mime type
    */
   getExtension(type: string): string | null {
-    const isType = /^\s*([^;\s]*)/.test(type) && RegExp.$1;
-    return type && this.extensions.get(type.toLowerCase()) || null;
+    const result = /^\s*([^;\s]*)/.exec(type);
+
+    if (result != null && result.length === 2) {      
+      return this.extensions.get(result[1].toLowerCase()) ?? null;
+    }
+
+    return null;
   }
 
   getExtensions(): string[] {
-      return [...this.types.keys()];
+    return [...this.types.keys()];
   }
 }
