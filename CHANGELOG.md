@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.5](https://github.com/idea-plex/mime/compare/v2.5.4...v2.5.5) (2021-06-01)
+
 ### [2.5.4](https://github.com/broofa/mime/compare/v2.5.2...v2.5.4) (2021-06-01)
 
 Converted project to typescript, including es and cjs modules.

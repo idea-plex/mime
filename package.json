@@ -4,7 +4,7 @@
     "url": "git@github.com:idea-plex/mime.git",
     "type": "git"
   },
-  "version": "2.5.4",
+  "version": "2.5.5",
   "maintainers": [
     {
       "name": "Jeffrey Drake",
@@ -18,9 +18,6 @@
   },
   "engines": {
     "node": ">=14.0.0"
-  },
-  "bin": {
-    "mime": "cli.js"
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
