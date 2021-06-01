@@ -1,10 +1,16 @@
 {
   "name": "@ideaplex/mime",
   "repository": {
-    "url": "https://github.com/broofa/mime",
+    "url": "git@github.com:idea-plex/mime.git",
     "type": "git"
   },
   "version": "2.5.4",
+  "maintainers": [
+    {
+      "name": "Jeffrey Drake",
+      "email": "jeff@ideaplex.ca"
+    }
+  ],
   "author": {
     "name": "Robert Kieffer",
     "url": "http://github.com/broofa",
@@ -19,12 +25,6 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "module": "lib/index.mjs",
-  "contributors": [
-    {
-      "name": "Jeffrey Drake",
-      "email": "jeff@ideaplex.ca"
-    }
-  ],
   "description": "A comprehensive library for mime-type mapping (typescript version)",
   "license": "MIT",
   "dependencies": {},
