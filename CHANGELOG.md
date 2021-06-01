@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [2.5.4](https://github.com/broofa/mime/compare/v2.5.2...v2.5.4) (2021-06-01)
 
+Converted project to typescript, including es and cjs modules.
+Removed cli, not needed.
+Expanded some testing.
+
 ### [2.5.2](https://github.com/broofa/mime/compare/v2.5.0...v2.5.2) (2021-02-17)
 
 
