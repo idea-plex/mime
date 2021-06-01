@@ -4,7 +4,7 @@
     "url": "https://github.com/broofa/mime",
     "type": "git"
   },
-  "version": "2.5.3",
+  "version": "2.5.4",
   "author": {
     "name": "Robert Kieffer",
     "url": "http://github.com/broofa",
@@ -16,9 +16,9 @@
   "bin": {
     "mime": "cli.js"
   },
-  "main": "lib/mime.js",
+  "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "module": "lib/mime.mjs",
+  "module": "lib/index.mjs",
   "contributors": [
     {
       "name": "Jeffrey Drake",
@@ -37,7 +37,7 @@
     "eslint": "7.26.0",
     "mime-db": "1.48.0",
     "mime-score": "1.2.0",
-    "mime-types": "2.1.30",      
+    "mime-types": "2.1.30",
     "standard-version": "9.1.0",
     "typescript": "^4.3.2",
     "prettier": "^2.3.0",
@@ -56,19 +56,18 @@
   "files": [
     "lib/index.js",
     "lib/index.d.ts",
-    "lib/index.mjs",
-    "lib/cli.js"    
+    "lib/index.mjs"
   ],
   "scripts": {
     "build": "node scripts/build.js && rollup -c && runmd --output README.md src/README_js.md",
     "lint": "eslint --fix",
     "release": "standard-version",
-    "benchmark": "node --experimental-specifier-resolution=node scripts/benchmark.mjs",  
+    "benchmark": "node --experimental-specifier-resolution=node scripts/benchmark.mjs",
     "test": "jest",
-    "coverage": "jest --coverage"        
+    "coverage": "jest --coverage"
   },
   "keywords": [
     "util",
     "mime"
-  ]  
+  ]
 }
