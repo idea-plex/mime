@@ -30,7 +30,7 @@ describe('class Mime', function () {
   });
 
   it('define()', function () {
-    let mime = new Mime({ 'text/a': ['a'] }, { 'text/b': ['b'] });
+    const mime = new Mime({ 'text/a': ['a'] }, { 'text/b': ['b'] });
 
     expect(() => mime.define({ 'text/c': ['b'] })).toThrow();
 
@@ -48,8 +48,22 @@ describe('class Mime', function () {
     expect(extensions.get('text/c')).toBe('b');
   });
 
+  it('define() multiple extensions', () => {
+    const mime = new Mime({ 'text/a': ['a'] });
+
+    expect(mime.getExtension('text/a')).toBe('a');
+
+    mime.define({ 'text/a': ['b']}, false);
+
+    expect(mime.getExtension('text/a')).toBe('a');
+
+    mime.define({ 'text/a': ['c']}, true);
+    
+    expect(mime.getExtension('text/a')).toBe('c');
+  })
+
   it('define() *\'ed types', function () {
-    let mime = new Mime(
+    const mime = new Mime(
       { 'text/a': ['*b'] },
       { 'text/b': ['b'] }
     );
@@ -130,25 +144,19 @@ describe('class Mime', function () {
     expect(mime.getExtension(null as any)).toBeNull();
     expect(mime.getExtension(undefined as any)).toBeNull();
     expect(mime.getExtension(42 as any)).toBeNull();
-    expect(mime.getExtension({} as any)).toBeNull();
+    expect(mime.getExtension({} as any)).toBeNull();    
+
+    expect(mime.getExtension(';')).toBeNull();
+  });
+
+  it('getExtensions()', () => {
+    const exts = mime.getExtensions();
+    expect(exts).not.toBeNull();
+    expect(exts.length).toBeGreaterThan(0);
   });
 });
 
 describe('DB', () => {
-  let diffs: [string, string, string, string][] = [];
-
-  afterEach(() => {
-    if (diffs.length) {
-      console.log('\n[INFO] The following inconsistencies with MDN (https://goo.gl/lHrFU6) and/or mime-types (https://github.com/jshttp/mime-types) are expected:');
-      diffs.forEach(function (d) {
-        console.warn(
-          '  ' + d[0] + '[' + chalk.blue(d[1]) + '] = ' + chalk.red(d[2]) +
-          ', mime[' + d[1] + '] = ' + chalk.green(d[3])
-        );
-      });
-    }
-  });  
-
   it('Specific types', function () {
     // Assortment of types we sanity check for good measure
     expect(mime.getType('html')).toBe('text/html');
@@ -182,17 +190,3 @@ describe('DB', () => {
     expect(mime.getExtension('text/xml')).toBe('xml'); // See #180
   });
 });
-
-// describe('mime CLI', () => {
-//   it('returns type', () => {
-//     return new Promise<void>((resolve, reject) => {
-//       exec('./cli.js mpeg', (err: ExecException | null, stdout: string, stderr: string) => {
-//         if (err) reject(err);
-//         expect(stdout).toBe('video/mpeg\n');
-//         resolve();
-//       });
-//     });
-//   });
-// });
-
-

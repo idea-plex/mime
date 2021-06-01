@@ -63,8 +63,7 @@
     "build": "node scripts/build.js && rollup -c && runmd --output README.md src/README_js.md",
     "lint": "eslint --fix",
     "release": "standard-version",
-    "benchmark": "node --experimental-specifier-resolution=node scripts/benchmark.mjs",
-    "md": "runmd --watch --output README.md src/README_js.md",
+    "benchmark": "node --experimental-specifier-resolution=node scripts/benchmark.mjs",  
     "test": "jest",
     "coverage": "jest --coverage"        
   },

@@ -35,7 +35,7 @@ export class Mime {
  * @param map (Object) type definitions
  * @param force (Boolean) if true, force overriding of existing definitions
  */
-  define(typeMap: MimeMap, force?: boolean) {
+  define(typeMap: MimeMap, force?: boolean): void {
     for (const [typ, exts] of Object.entries(typeMap)) {
       const extensions = exts.map(t => t.toLowerCase());
       const type = typ.toLowerCase();
@@ -85,10 +85,10 @@ export class Mime {
   /**
    * Return file extension associated with a mime type
    */
-  getExtension(type: string): string | null {
+  getExtension(type: string): string | null {    
     const result = /^\s*([^;\s]*)/.exec(type);
 
-    if (result != null && result.length === 2) {      
+    if (result != null && result.length === 2 && result[0] != '') {      
       return this.extensions.get(result[1].toLowerCase()) ?? null;
     }
 
